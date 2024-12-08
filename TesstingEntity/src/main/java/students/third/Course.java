@@ -12,6 +12,10 @@ public class Course {
     private int creditPoints;
 
     @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
+    @ManyToOne
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
