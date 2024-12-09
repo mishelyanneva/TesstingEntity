@@ -1,20 +1,19 @@
 package students.second;
 
+import java.util.List;
+
 public class TeacherDTO {
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
+    private List<Long> courseIds;
 
-    // Default constructor
-    public TeacherDTO() {}
+    public TeacherDTO() {
+    }
 
-    // Parameterized constructor
-    public TeacherDTO(Long id, String firstName, String lastName, String email) {
+    public TeacherDTO(Long id, String name, List<Long> courseIds) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        this.name = name;
+        this.courseIds = courseIds;
     }
 
     // Getters and Setters
@@ -26,38 +25,19 @@ public class TeacherDTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public List<Long> getCourseIds() {
+        return courseIds;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    // toString() method
-    @Override
-    public String toString() {
-        return "TeacherDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public void setCourseIds(List<Long> courseIds) {
+        this.courseIds = courseIds;
     }
 }

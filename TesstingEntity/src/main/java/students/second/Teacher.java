@@ -1,7 +1,7 @@
 package students.second;
 
 import jakarta.persistence.*;
-import third.student.Course;
+import students.third.Course;
 
 import java.util.List;
 
@@ -11,30 +11,16 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Course> courses;
 
-    // Default constructor
-    public Teacher() {}
-
-    // Parameterized constructor
-    public Teacher(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public Teacher() {
     }
 
-    // Parameterized constructor with all fields
-    public Teacher(Long id, String firstName, String lastName, String email, List<Course> courses) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.courses = courses;
+    public Teacher(String name) {
+        this.name = name;
     }
 
     // Getters and Setters
@@ -46,28 +32,12 @@ public class Teacher {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Course> getCourses() {
@@ -76,17 +46,5 @@ public class Teacher {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    // toString() method
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", courses=" + (courses != null ? courses.size() : 0) +
-                '}';
     }
 }

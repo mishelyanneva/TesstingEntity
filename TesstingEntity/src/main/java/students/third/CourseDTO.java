@@ -4,15 +4,16 @@ public class CourseDTO {
     private Long id;
     private String name;
     private String description;
-    private int creditPoints;
-    private TeacherDTO teacherDTO; // Add a field for TeacherDTO
+    private Long teacherId;
 
-    public CourseDTO(Long id, String name, String description, int creditPoints, TeacherDTO teacherDTO) {
+    public CourseDTO() {
+    }
+
+    public CourseDTO(Long id, String name, String description, Long teacherId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.creditPoints = creditPoints;
-        this.teacherDTO = teacherDTO;
+        this.teacherId = teacherId;
     }
 
     // Getters and Setters
@@ -40,19 +41,11 @@ public class CourseDTO {
         this.description = description;
     }
 
-    public int getCreditPoints() {
-        return creditPoints;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setCreditPoints(int creditPoints) {
-        this.creditPoints = creditPoints;
-    }
-
-    public TeacherDTO getTeacherDTO() { // Getter for TeacherDTO
-        return teacherDTO;
-    }
-
-    public void setTeacherDTO(TeacherDTO teacherDTO) { // Setter for TeacherDTO
-        this.teacherDTO = teacherDTO;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

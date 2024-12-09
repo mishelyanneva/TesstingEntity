@@ -1,7 +1,9 @@
-package third.student;
+package students.third;
 
 import jakarta.persistence.*;
+import students.second.Teacher;
 
+@Entity
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -9,34 +11,18 @@ public class Course {
 
     private String name;
     private String description;
-    private int creditPoints;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
-
-    // Default constructor
     public Course() {
     }
 
-    // Parameterized constructor
-    public Course(String name, String description, int creditPoints) {
+    public Course(String name, String description, Teacher teacher) {
         this.name = name;
         this.description = description;
-        this.creditPoints = creditPoints;
-    }
-
-    // Parameterized constructor with all fields
-    public Course(Long id, String name, String description, int creditPoints, Classroom classroom) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.creditPoints = creditPoints;
-        this.classroom = classroom;
+        this.teacher = teacher;
     }
 
     // Getters and Setters
@@ -64,31 +50,11 @@ public class Course {
         this.description = description;
     }
 
-    public int getCreditPoints() {
-        return creditPoints;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setCreditPoints(int creditPoints) {
-        this.creditPoints = creditPoints;
-    }
-
-    public Classroom getClassroom() {
-        return classroom;
-    }
-
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
-    }
-
-    // toString() method
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", creditPoints=" + creditPoints +
-                ", classroom=" + (classroom != null ? classroom.getId() : null) +
-                '}';
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

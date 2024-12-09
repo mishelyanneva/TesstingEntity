@@ -1,34 +1,27 @@
-package third.student;
+package students.third;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseService {
 
     private final CourseRepository courseRepository;
 
-    @Autowired
     public CourseService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public List<Course> getCoursesByTeacherId(Long teacherId) {
+        return courseRepository.findCoursesByTeacherId(teacherId);
     }
 
-    public Optional<Course> getCourseById(Long id) {
-        return courseRepository.findById(id);
+    public List<Course> getCoursesByType(String type) {
+        return courseRepository.findCoursesByType(type);
     }
 
-    public Course saveCourse(Course course) {
-        return courseRepository.save(course);
-    }
-
-    public void deleteCourse(Long id) {
-        courseRepository.deleteById(id);
+    public List<Course> getCoursesByTeacherAndType(Long teacherId, String type) {
+        return courseRepository.findCoursesByTeacherAndType(teacherId, type);
     }
 }

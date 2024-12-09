@@ -1,10 +1,8 @@
-package third.student;
+package students.third;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/courses")
@@ -12,29 +10,46 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    @Autowired
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    @GetMapping
-    public List<CourseDTO> getAllCourses() {
-        return courseService.getAllCourses().stream().map(CourseMapper::toDTO).toList();
+    // Филтриране по преподавател
+    @GetMapping("/by-teacher/{teacherId}")
+    public List<CourseDTO> getCoursesByTeacher(@PathVariable Long teacherId) {
+        return courseService.getCoursesByTeacherId(teacherId)
+                .stream()
+                .map(course -> new CourseDTO(
+                        course.getId(),
+                        course.getName(),
+                        course.getDescription(),
+                        course.getTeacher().getId()))
+                .toList();
     }
 
-    @GetMapping("/{id}")
-    public Optional<CourseDTO> getCourseById(@PathVariable Long id) {
-        return courseService.getCourseById(id).map(CourseMapper::toDTO);
+    // Филтриране по тип курс
+    @GetMapping("/by-type")
+    public List<CourseDTO> getCoursesByType(@RequestParam String type) {
+        return courseService.getCoursesByType(type)
+                .stream()
+                .map(course -> new CourseDTO(
+                        course.getId(),
+                        course.getName(),
+                        course.getDescription(),
+                        course.getTeacher().getId()))
+                .toList();
     }
 
-    @PostMapping
-    public CourseDTO createCourse(@RequestBody CourseDTO courseDTO) {
-        // Add logic to fetch Classroom and Teacher by ID if needed
-        return CourseMapper.toDTO(courseService.saveCourse(CourseMapper.toEntity(courseDTO, null, null)));
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteCourse(@PathVariable Long id) {
-        courseService.deleteCourse(id);
+    // Филтриране по преподавател и тип курс
+    @GetMapping("/by-teacher-and-type")
+    public List<CourseDTO> getCoursesByTeacherAndType(@RequestParam Long teacherId, @RequestParam String type) {
+        return courseService.getCoursesByTeacherAndType(teacherId, type)
+                .stream()
+                .map(course -> new CourseDTO(
+                        course.getId(),
+                        course.getName(),
+                        course.getDescription(),
+                        course.getTeacher().getId()))
+                .toList();
     }
 }
